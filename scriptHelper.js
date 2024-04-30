@@ -42,13 +42,35 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
          - text color of launchStatus should change to red
          -if shuttle ready to launch, change text of launchStatus to green and disply "Shuttle is ready for launch"
      */
-    let visual = document.getElementById("missionTarget");
-    visual.innerHTML = `${validateInput(pilot.value)}`
-    console.log(pilot.value);
-    if(validateInput(pilot.value) === "empty"  || validateInput(copilot.value) === "empty" 
-        || validateInput(fuelLevel.value) === "empty"  || validateInput(cargoLevel.value) === "empty"){
+//alert for empty forms
+    if(validateInput(pilot.value) === "Empty"  || validateInput(copilot.value) === "Empty" 
+        || validateInput(fuelLevel.value) === "Empty"  || validateInput(cargoLevel.value) === "Empty"){
         alert("Please fill out all necessary forms");
     }
+
+//alert correct type of input for forms
+    if(validateInput(pilot.value) === "Is a Number" || validateInput(copilot.value) === "Is a Number"
+    || validateInput(fuelLevel.value) === "Not a Number" || validateInput(cargoLevel.value) === "Not a Number"){
+        alert("Fill out the correct type for forms");
+    }
+
+//
+    if(fuelLevel.value < 10000){
+        list.style = "visibility: visible";
+        document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot.value} is ready for launch`;
+        document.getElementById("copilotStatus").innerHTML = `Pilot ${copilot.value} is ready for launch`;
+        document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch";
+        document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch";
+        document.getElementById("launchStatus").style.color = "red";
+    }
+
+    if(cargoLevel.value > 10000){
+
+    }
+
+
+    let visual = document.getElementById("missionTarget");
+    visual.innerHTML = `${fuelLevel.value}`
 
  }
  

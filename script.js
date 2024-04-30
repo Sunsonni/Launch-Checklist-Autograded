@@ -16,12 +16,14 @@ window.addEventListener("load", function() {
     // })
     init();    
 });
+
+
 function init(){
-    const status =  document.getElementById("launchStatusCheck");
-    const pilot = document.getElementById("pilotName");
-    const copilot = document.getElementById("copilotName");
-    const fuel = document.getElementById("fuelLevel");
-    const cargo = document.getElementById("cargoMass");
+    const status =  document.getElementById("faultyItems");
+    const pilot = document.querySelector("input[name=pilotName]");
+    const copilot = document.querySelector("input[name=copilotName]");
+    const fuel = document.querySelector("input[name=fuelLevel]");
+    const cargo = document.querySelector("input[name=cargoMass]");
     const button = document.getElementById("formSubmit");
    
     button.addEventListener("click", function(){
