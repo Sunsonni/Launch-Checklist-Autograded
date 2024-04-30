@@ -18,20 +18,47 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
-    
+   if(testInput === ""){
+    return "Empty";
+   } else if(!isNaN(testInput)){
+    return "Is a Number";
+   } else {
+    return "Not a Number";
+   }
  }
- 
- function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    
+
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    //utilize validateInput to complete form submission
+     /*update shuttle requirements: 
+         - div with id faultyItems should be updated
+         - use template literals to update li elements pilotStatus and copilotStatus includes names
+         - if input fuel level is too low(less than 10,000 liters) change faulty items to visible
+         with updated fuel status stating not enough fuel for journey
+         - Text of h2 launchStatus should change to "Shuttle not ready for launch" 
+         - Color of launchStatus Test should turn red
+         - if cargo mass more than 10,000 lg change lsit to visible with updated cargo status
+         stating that there is too much mass for shuttle to take off.
+         - text of launch status changes to "Shuttle not ready for launch"
+         - text color of launchStatus should change to red
+         -if shuttle ready to launch, change text of launchStatus to green and disply "Shuttle is ready for launch"
+     */
+    let visual = document.getElementById("missionTarget");
+    visual.innerHTML = `${validateInput(pilot.value)}`
+    console.log(pilot.value);
+    if(validateInput(pilot.value) === "empty"  || validateInput(copilot.value) === "empty" 
+        || validateInput(fuelLevel.value) === "empty"  || validateInput(cargoLevel.value) === "empty"){
+        alert("Please fill out all necessary forms");
+    }
+
  }
  
  async function myFetch() {
-     let planetsReturned;
+    //  let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
-         });
+    //  planetsReturned = await fetch().then( function(response) {
+    //      });
  
-     return planetsReturned;
+    //  return planetsReturned;
  }
  
  function pickPlanet(planets) {
