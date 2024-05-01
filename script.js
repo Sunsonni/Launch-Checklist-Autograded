@@ -6,7 +6,6 @@ window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
-        // console.log(listedPlanets);
         planet = pickPlanet(listedPlanets);
         addDestinationInfo(document, planet.name, planet.diameter, planet.star, 
             planet.distance, planet.moons, planet.image);
@@ -22,7 +21,7 @@ function init(){
     const cargo = document.querySelector("input[name=cargoMass]");
     const button = document.getElementById("formSubmit");
    
-    button.addEventListener("click", function(){
+    button.addEventListener("click", function(event){
         formSubmission(document, status, pilot.value, copilot.value, fuel.value, cargo.value);
         event.preventDefault();
     });
