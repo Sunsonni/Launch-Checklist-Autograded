@@ -25,16 +25,24 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
 //function validates form items and then applies status changes
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-//alert for empty forms
+//alert for empty formss
+    let emptyPass = false;
+    let correctInputPass = false
     if(validateInput(pilot) === "Empty"  || validateInput(copilot) === "Empty" 
         || validateInput(fuelLevel) === "Empty"  || validateInput(cargoLevel) === "Empty"){
+        emptyPass = false;
         alert("Please fill out all necessary forms");
+    } else {
+        emptyPass = true;
     }
 
 //alert if incorrect input in forms
     if(validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number"
     || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number"){
+        correctInputPass = false;
         alert("Fill out the correct type for forms");
+    } else {
+        correctInputPass = true;
     }
 //function that changes status to not ready items
     let redLight = function (){
@@ -57,7 +65,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 //conditionals checking fuel and cargo levels
     if (fuelLevel >= 10000 && cargoLevel <= 10000){
         greenLight();
-    } else {
+    } else if (correctInputPass && emptyPass){
         if(fuelLevel < 10000){
             redLight();
             document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch";
@@ -70,9 +78,10 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         } else {
             redLight();
             document.getElementById("cargoStatus").innerHTML = "Cargo mass too heavy for launch";
-        }
+        } 
     }
- }
+    }
+
 //fetch for planets
  async function myFetch() {
      let planetsReturned;
