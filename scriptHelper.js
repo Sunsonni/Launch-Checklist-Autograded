@@ -1,23 +1,19 @@
-// Write your helper functions here!
-
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
-  
+    let destination = document.getElementById("missionTarget");
+    destination.innerHTML = ` 
+    <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${name} </li>
+            <li>Diameter: ${diameter}</li>
+            <li>Star: ${star}</li>
+            <li>Distance from Earth: ${distance}</li>
+            <li>Number of Moons: ${moons}</li>
+        </ol>
+        <img src="${imageUrl}">`;
  }
- 
+ //validates whether it's an empty string. Otherwise checks if it's a number.
  function validateInput(testInput) {
    if(testInput === ""){
     return "Empty";
@@ -27,7 +23,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     return "Not a Number";
    }
  }
-
+//function validates form items and then applies status changes
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 //alert for empty forms
     if(validateInput(pilot) === "Empty"  || validateInput(copilot) === "Empty" 
@@ -35,12 +31,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         alert("Please fill out all necessary forms");
     }
 
-//alert correct type of input for forms
+//alert if incorrect input in forms
     if(validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number"
     || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number"){
         alert("Fill out the correct type for forms");
     }
-
+//function that changes status to not ready items
     let redLight = function (){
         list.style = "visibility: visible";
             document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`;
@@ -48,7 +44,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             document.getElementById("launchStatus").innerHTML = "Shuttle Not Ready for Launch";
             document.getElementById("launchStatus").style.color = "red";
     };
-    
+//function that changes status to ready items
     let greenLight = function(){
         list.style = "visibility: visible";
         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`;
@@ -58,7 +54,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch";
         document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch";
     };
-
+//conditionals checking fuel and cargo levels
     if (fuelLevel >= 10000 && cargoLevel <= 10000){
         greenLight();
     } else {
@@ -68,7 +64,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         } else {
             redLight();
             document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch";
-            console.log(document.getElementById("fuelStatus").innerHTML);
         }
         if(cargoLevel < 10000){ 
             document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch";
@@ -78,7 +73,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         }
     }
  }
- 
+//fetch for planets
  async function myFetch() {
      let planetsReturned;
  
@@ -88,12 +83,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         })
     return planetsReturned;
 };
-
- 
-
- 
+//function that selects random planet and returns selectedPlanet
  function pickPlanet(planets) {
-    console.log(planets);
     let randomIndex;
     let selectedPlanet;
 
